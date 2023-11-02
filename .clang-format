@@ -1,0 +1,26 @@
+---
+BasedOnStyle: LLVM
+IndentWidth: 4
+
+AllowShortFunctionsOnASingleLine: true
+AllowShortCaseLabelsOnASingleLine: true
+AllowShortBlocksOnASingleLine: Always
+AllowShortIfStatementsOnASingleLine: AllIfsAndElse
+AllowShortLoopsOnASingleLine: true
+
+# AlignConsecutiveShortCaseStatements: true
+# AlignConsecutiveShortCaseStatements:
+#   Enabled: true
+#   AcrossEmptyLines: true
+#   AcrossComments: true
+#   AlignCaseColons: false
+
+ColumnLimit: 0
+# AlignConsecutiveAssignments : AcrossEmptyLines
+AlignConsecutiveDeclarations: true
+PointerAlignment: Left
+AlignTrailingComments: true
+AlignOperands:   true
+# ArrayInitializerAlignmentStyle: Right
+IncludeBlocks: Preserve
+MaxEmptyLinesToKeep: 2
