@@ -65,7 +65,7 @@ int windowIsOpen() {
 
 void glSwapBuffers() {
     glfwSwapBuffers(window);
-    glfwSwapInterval(1); // vsync 0-off, 1-on
+    glfwSwapInterval(0); // vsync 0-off, 1-on
     glfwPollEvents();
 }
 
@@ -112,12 +112,19 @@ void scroll_callback(GLFWwindow* window, double xoffset, double yoffset) {
 }
 
 void getFrameTime() {
+    static char title[256];
     GLfloat currentFrame = glfwGetTime();
     deltaTime = currentFrame - lastFrame;
     lastFrame = currentFrame;
 
-    std::cout << 1 / deltaTime << " [FPS]" << std::endl;
+    // Calculate FPS
+    int fps = static_cast<int>(1.0f / deltaTime);
+
+    // Update the window title
+    snprintf(title, sizeof(title), "Corebsp (%d FPS)", fps);
+    glfwSetWindowTitle(window, title);
 }
+
 
 void transformCamera(int shader_ID) {
     Do_Movement();

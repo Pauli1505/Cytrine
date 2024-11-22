@@ -11,5 +11,5 @@ g++ $CCARGS -c src/w_init.cpp    -o build/w_init.o
 g++ $CCARGS -c aux/glad.c        -o build/glad.o
 
 g++ -o $DEST $LINKARGS
-
+rm -rf build/main.o build/w_init.o build/Quake3Bsp.o build/glad.o
 ./build/CoreBSP maps/Level.bsp

@@ -20,4 +20,3 @@ void main()
     g_TexCoord = vec2(in_texCoord.x, in_texCoord.y);
     g_LmapCoord = vec2(in_lmapCoord.x, in_lmapCoord.y);
 }
-
