@@ -93,7 +93,7 @@ bool CQuake3BSP::LoadBSP(const char* filename) {
     for (int i = 0; i < m_numOfTextures; i++) {
         // Find the extension if any and append it to the file name
         strcpy(tname[i], pTextures[i].strName);
-        strcat(tname[i], ".jpg");
+        strcat(tname[i], ".tga");
         printf("loading: %s \n", tname[i]);
     }
 
