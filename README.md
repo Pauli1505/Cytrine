@@ -27,3 +27,10 @@ Used documentation
 
 For more maps see
 - https://lvlworld.com/
+
+
+BY THE WAY:
+Thanks to these entities or individuals:
+The Team at ID Software that developed Quake 3 (Thank you for this wonderful game series, john romero!)
+The Person who made this
+All my developers. (Dev, Stupd, me)
