@@ -2,6 +2,7 @@
 
 #include "camera.h"
 #include "w_init.h"
+#include "config.h"
 
 #define GLM_FORCE_RADIANS
 #include <glm/glm.hpp>
@@ -33,7 +34,7 @@ void initWindow(const char* wndName, int screenWidth, int screenHeight, int majo
     window = glfwCreateWindow(screenWidth, screenHeight, wndName, nullptr, nullptr); // Windowed
 
     if (!window) {
-        std::cout << "error in glfwCreateWindow context" << std::endl;
+        std::cout << "ENGINE_CYTRINE_RUNTIME_ERR_GL: error in glfwCreateWindow context" << std::endl;
         return;
     }
 
@@ -48,13 +49,13 @@ void initWindow(const char* wndName, int screenWidth, int screenHeight, int majo
 
     // load extensions
     if (!gladLoadGL()) {
-        std::cout << "Failed to initialize OpenGL context" << std::endl;
+        std::cout << "ENGINE_CYTRINE_RUNTIME_ERR_GL: Failed to initialize OpenGL context" << std::endl;
     }
 
     glViewport(0, 0, screenWidth, screenHeight); // Define the viewport dimensions
     glEnable(GL_DEPTH_TEST);                     // Setup some OpenGL options
 
-    std::cout << "Using OpenGL v" << glGetString(GL_VERSION) << std::endl;
+    std::cout << "ENGINE_CYTRINE_INFO: Using OpenGL v" << glGetString(GL_VERSION) << std::endl;
 }
 
 int windowIsOpen() {
@@ -65,7 +66,11 @@ int windowIsOpen() {
 
 void glSwapBuffers() {
     glfwSwapBuffers(window);
-    glfwSwapInterval(0); // vsync 0-off, 1-on
+    #if VSYNC == 1
+    glfwSwapInterval(1);
+	#else
+	glfwSwapInterval(0);
+    #endif
     glfwPollEvents();
 }
 
@@ -121,7 +126,7 @@ void getFrameTime() {
     int fps = static_cast<int>(1.0f / deltaTime);
 
     // Update the window title
-    snprintf(title, sizeof(title), "Corebsp (%d FPS)", fps);
+    snprintf(title, sizeof(title), "Cytrine (%d FPS)", fps);
     glfwSetWindowTitle(window, title);
 }
 
@@ -150,7 +155,10 @@ void transformCamera(int shader_ID) {
 void getShaderUniforms(int shader_ID) {
     glUniform1i(glGetUniformLocation(shader_ID, "s_bspTexture"), 0);
     glUniform1i(glGetUniformLocation(shader_ID, "s_bspLightmap"), 1);
-    std::cout << "glGetUniformLocation s_bspTexture  " << glGetUniformLocation(shader_ID, "s_bspTexture")  << std::endl;
-    std::cout << "glGetUniformLocation s_bspLightmap " << glGetUniformLocation(shader_ID, "s_bspLightmap") << std::endl;
-    std::cout << "shader_ID: " << shader_ID << std::endl;
+
+    #if DEBUG_MODE == 1
+    std::cout << "[ENGINE_CYTRINE_DEBUG]*glGetUniformLocation s_bspTexture  " << glGetUniformLocation(shader_ID, "s_bspTexture")  << std::endl;
+    std::cout << "[ENGINE_CYTRINE_DEBUG]*glGetUniformLocation s_bspLightmap " << glGetUniformLocation(shader_ID, "s_bspLightmap") << std::endl;
+    std::cout << "[ENGINE_CYTRINE_DEBUG]*shader_ID: " << shader_ID << std::endl;
+    #endif
 }
